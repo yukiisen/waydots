@@ -3239,7 +3239,7 @@ xwaylandready(struct wl_listener *listener, void *data)
 int
 main(int argc, char *argv[])
 {
-	char *startup_cmd = NULL;
+	char *startup_cmd = "~/.dwlrc";
 	int c;
 
 	while ((c = getopt(argc, argv, "s:hdv")) != -1) {
