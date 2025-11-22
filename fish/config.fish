@@ -62,7 +62,7 @@ alias uscroll="adb shell input swipe 300 300 300 900"
 zoxide init --cmd cd fish | source 
 
 # current zig version
-set --export PATH ~/Documents/apps/zig-x86_64-linux-0.16.0-dev.230+fb3afc8d3/ $PATH
+set --export PATH ~/Documents/apps/zig/ $PATH
 set --export PATH ~/.local/bin/ $PATH
 
 # Android Stuff
@@ -86,6 +86,10 @@ set --export PKG_CONFIG_PATH /usr/lib $PKG_CONFIG_PATH
 # set --export TERM kitty
 
 set --export TERM xterm-256color
+
+# locales 
+set -x LANG en_US.UTF-8
+set -x LC_ALL en_US.UTF-8
 
 # pnpm
 set -gx PNPM_HOME "/home/yuki/.local/share/pnpm"

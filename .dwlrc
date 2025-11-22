@@ -1,0 +1,9 @@
+#!/bin/sh
+pipewire &
+pipewire-pulse &
+wireplumber &
+wbg $(cat ~/.cache/wal/wal) --stretch &
+wlsunset -l 36.7 -L 3.0 -T 6500 -t 4800 &
+mako &
+foot --server &
+rm ~/tmp/* -rf
