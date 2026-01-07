@@ -26,10 +26,10 @@ static int log_level = WLR_ERROR;
 
 /* NOTE: ALWAYS keep a rule declared even if you don't use rules (e.g leave at least one example) */
 static const Rule rules[] = {
-	/* app_id             title       tags mask     isfloating   alpha              monitor */
-	/* examples: */
-	{ "foot",     	NULL,       0,            0,           0.9,               -1 }, /* Start on currently visible tags floating, not tiled */
-	{ "librewolf",  NULL,       1 << 0,       0,           1.0,               -1 }, /* Start on ONLY tag "1" */
+	/* app_id             title       tags mask     isfloating   alpha                monitor */
+	{ "foot",     	      NULL,       0,            0,           0.95f,               -1 }, /* Start on currently visible tags floating, not tiled */
+	{ "zathura",     	  NULL,       0,            0,           0.95f,               -1 }, /* Start on currently visible tags floating, not tiled */
+	{ "librewolf",        NULL,       1 << 0,       0,           1.0f,                -1 }, /* Start on ONLY tag "1" */
 };
 
 /* layout(s) */
@@ -52,15 +52,12 @@ static const MonitorRule monrules[] = {
 	{ "eDP-1",    0.5f,  1,      2,    &layouts[0], WL_OUTPUT_TRANSFORM_NORMAL,   -1,  -1 },
 	*/
 	/* defaults */
-	{ NULL,       0.55f, 1,      1,    &layouts[0], WL_OUTPUT_TRANSFORM_NORMAL,   -1,  -1 },
+	{ NULL,       0.55f, 1,      1,    &layouts[2], WL_OUTPUT_TRANSFORM_NORMAL,   -1,  -1 },
 };
 
 /* keyboard */
 static const struct xkb_rule_names xkb_rules = {
 	/* can specify fields: rules, model, layout, variant, options */
-	/* example:
-	.options = "ctrl:nocaps",
-	*/
 	.options = "grp:win_space_toggle,caps:escape",
 	.variant = NULL,
 	.layout = "us,ara"
@@ -124,19 +121,31 @@ static const enum libinput_config_tap_button_map button_map = LIBINPUT_CONFIG_TA
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
+#define SCREENSHOTS_DIR "~/Pictures/Screenshots/"
+
 /* commands */
 static const char *termcmd[] = { "footclient", NULL };
 static const char *menucmd[] = { "rofi", "-show", "drun", "-theme", "~/.config/rofi/theme.rasi" , NULL };
-static const char *screenshot[] = { "fish", "-c", "grim -g \"$(slurp)\" - | wl-copy", NULL };
+static const char *screenshot[] = { "fish", "-c", "grim -g \"$(slurp)\" - | wl-copy && wl-paste > " SCREENSHOTS_DIR "$(date).png", NULL };
+static const char *screenshotFull[] = { "fish", "-c", "grim - | wl-copy && wl-paste > " SCREENSHOTS_DIR "$(date).png", NULL };
+static const char *volumeup[] = { "pactl", "set-sink-volume", "@DEFAULT_SINK@", "+5%", NULL };
+static const char *volumedown[] = { "pactl", "set-sink-volume", "@DEFAULT_SINK@", "-5%", NULL };
+static const char *volumemute[] = { "pactl", "set-sink-mute", "@DEFAULT_SINK@", "toggle", NULL };
+
+#undef SCREENSHOTS_DIR
 
 static const Key keys[] = {
 	/* Note that Shift changes certain key codes: c -> C, 2 -> at, etc. */
 	/* modifier                  key                 function        argument */
 	{ MODKEY,                    XKB_KEY_a,          spawn,          {.v = menucmd} },
-	{ MODKEY,                    XKB_KEY_p,          spawn,          {.v = screenshot} },
+	{ MODKEY,                    XKB_KEY_p,          spawn,          {.v = screenshotFull} },
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_P,          spawn,          {.v = screenshot} },
 	{ MODKEY,       		     XKB_KEY_Return,     spawn,          {.v = termcmd} },
 	{ MODKEY,                    XKB_KEY_j,          focusstack,     {.i = +1} },
 	{ MODKEY,                    XKB_KEY_k,          focusstack,     {.i = -1} },
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_J,          spawn,          {.v = volumedown} },
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_K,          spawn,          {.v = volumeup} },
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_M,          spawn,          {.v = volumemute} },
 	{ MODKEY,                    XKB_KEY_i,          incnmaster,     {.i = +1} },
 	{ MODKEY,                    XKB_KEY_d,          incnmaster,     {.i = -1} },
 	{ MODKEY,                    XKB_KEY_h,          setmfact,       {.f = -0.05f} },

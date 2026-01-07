@@ -16,47 +16,34 @@ if status is-interactive
         alias fzf="fzf --tmux"
     end
 
-    alias mpvsearch="mpv \$(find -maxdepth 4 | rg \"mp4|webm|mp3\" | fzf)"
-    alias mpvlist="mpv \$(ls | fzf)"
-    alias openpdf="evince \$(find -maxdepth 4 | rg .pdf | fzf) & disown "
+    alias mpvsearch="mpv \$(find -maxdepth 4 | rg \"mp4|webm|mp3\" | kiri --gaps)"
+    alias mpvlist="mpv \$(ls | kiri --gaps)"
 end
-
-# function osu
-#     ~/Games/osu.AppImage &
-#     sleep 1800 && pkill osu
-# end
-
-bass "eval \$(luarocks path --bin)"
-
-alias uwufetch="uwufetch --config ~/.config/uwufetch/config"
-alias aghpb="lua ~/.scripts/anime_girls.lua"
 
 alias rcli="redis-cli"
 alias rtui="redis_tui"
 
-alias play="mpv --ytdl-format=\"bestvideo[height<=144]+bestaudio\" -v"
 alias l="exa --icons --group-directories-first"
-alias start="~/.scripts/start.sh"
-alias wallpaper="~/.scripts/wallpaper.sh"
 alias la="l -a"
+alias ll="l -l"
 
 # mobile controls:
-alias voice+="adb shell input keyevent 24 & echo ok"
-alias voice-="adb shell input keyevent 25 & echo ok"
-alias openlark="adb shell input tap 300 1250"
-alias voiceonly="adb shell input tap 50 950 && adb shell input tap 50 950 & echo ok"
-alias videomode="adb shell input tap 300 400 & echo ok"
+# alias voice+="adb shell input keyevent 24 & echo ok"
+# alias voice-="adb shell input keyevent 25 & echo ok"
+# alias openlark="adb shell input tap 300 1250"
+# alias voiceonly="adb shell input tap 50 950 && adb shell input tap 50 950 & echo ok"
+# alias videomode="adb shell input tap 300 400 & echo ok"
 
-alias tap="adb shell input tap"
-alias minput="adb shell input"
+# alias tap="adb shell input tap"
+# alias minput="adb shell input"
 
-alias mplay="adb shell media dispatch play & echo ok"
-alias mpause="adb shell media dispatch pause & echo ok"
-alias mnext="adb shell media dispatch next & echo ok"
-alias mprev="adb shell media dispatch previous & echo ok"
+# alias mplay="adb shell media dispatch play & echo ok"
+# alias mpause="adb shell media dispatch pause & echo ok"
+# alias mnext="adb shell media dispatch next & echo ok"
+# alias mprev="adb shell media dispatch previous & echo ok"
 
-alias dscroll="adb shell input swipe 300 900 300 300"
-alias uscroll="adb shell input swipe 300 300 300 900"
+# alias dscroll="adb shell input swipe 300 900 300 300"
+# alias uscroll="adb shell input swipe 300 300 300 900"
 
 # zoxide init
 zoxide init --cmd cd fish | source 
@@ -75,8 +62,10 @@ set --export PATH $JAVA_HOME/bin $PATH
 # bun
 set --export BUN_INSTALL "$HOME/.bun"
 set --export PATH $BUN_INSTALL/bin $PATH
+
 # Golang
 set --export PATH $HOME/go/bin $PATH
+
 # C libs
 set --export PKG_CONFIG_PATH /usr/local/lib/pkgconfig $PKG_CONFIG_PATH
 set --export PKG_CONFIG_PATH /usr/lib/pkgconfig $PKG_CONFIG_PATH
@@ -87,21 +76,14 @@ set --export PKG_CONFIG_PATH /usr/lib $PKG_CONFIG_PATH
 
 set --export TERM xterm-256color
 
-# locales 
-set -x LANG en_US.UTF-8
-set -x LC_ALL en_US.UTF-8
+# # locales 
+# set -x LANG en_US.UTF-8
+# set -x LC_ALL en_US.UTF-8
 
-# pnpm
-set -gx PNPM_HOME "/home/yuki/.local/share/pnpm"
-if not string match -q -- $PNPM_HOME $PATH
-  set -gx PATH "$PNPM_HOME" $PATH
-end
-# pnpm end
-
-function __complete_syncthing
-    set -lx COMP_LINE (commandline -cp)
-    test -z (commandline -ct)
-    and set COMP_LINE "$COMP_LINE "
-    /usr/bin/syncthing
-end
-complete -f -c syncthing -a "(__complete_syncthing)"
+# function __complete_syncthing
+#     set -lx COMP_LINE (commandline -cp)
+#     test -z (commandline -ct)
+#     and set COMP_LINE "$COMP_LINE "
+#     /usr/bin/syncthing
+# end
+# complete -f -c syncthing -a "(__complete_syncthing)"

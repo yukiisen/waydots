@@ -1,9 +1,11 @@
-#!/bin/sh
+#!/bin/fish
 pipewire &
 pipewire-pulse &
 wireplumber &
-wbg $(cat ~/.cache/wal/wal) --stretch &
-wlsunset -l 36.7 -L 3.0 -T 6500 -t 4800 &
+wlsunset -l 36.75,-119.8 -t 5000,6500 &
 mako &
+wbg $(cat ~/.cache/wal/wal) --stretch &
 foot --server &
-rm ~/tmp/* -rf
+tmux new -ds bg
+tmux new -ds main
+rm -r ~/tmp/*
