@@ -2,10 +2,10 @@
 pipewire &
 pipewire-pulse &
 wireplumber &
-wlsunset -l 36.75,-119.8 -t 5000,6500 &
+wlsunset -l 36.75,-119.8 -t 4500,6500 &
 mako &
 wbg $(cat ~/.cache/wal/wal) --stretch &
 foot --server &
 tmux new -ds bg
 tmux new -ds main
-rm -r ~/tmp/*
+# rm -r ~/tmp/*

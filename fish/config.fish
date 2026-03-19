@@ -4,12 +4,16 @@ set -g fish_greeting ""
 if not set -q DBUS_SESSION_BUS_ADDRESS
     bass eval (dbus-launch --sh-syntax)
     set -gx DBUS_SESSION_BUS_ADDRESS $DBUS_SESSION_BUS_ADDRESS
+    # Set up XDG_RUNTIME_DIR if it's missing
+    if not set -q XDG_RUNTIME_DIR
+        set -gx XDG_RUNTIME_DIR /run/user/(id -u)
+    end
+    dbus-run-session dwl
 end
 
-# Set up XDG_RUNTIME_DIR if it's missing
-if not set -q XDG_RUNTIME_DIR
-    set -gx XDG_RUNTIME_DIR /run/user/(id -u)
-end
+export XDG_CURRENT_DESKTOP=sway
+export XDG_SESSION_TYPE=wayland
+
 
 if status is-interactive
     if test $TMUX # could be "set -q TMUX"
@@ -22,6 +26,8 @@ end
 
 alias rcli="redis-cli"
 alias rtui="redis_tui"
+
+alias ta="tmux a"
 
 alias l="exa --icons --group-directories-first"
 alias la="l -a"
