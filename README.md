@@ -32,6 +32,6 @@ dwl
 ```
 
 # Notes
-- For neovim config check the [Xdots](https://github.com/yukiisen/Xdots) Repository.
+- For old neovim config check the [Xdots](https://github.com/yukiisen/Xdots) Repository.
 - This is quite empty because I prefer to have more space on screen.
 - Hyprland is for femboys.
