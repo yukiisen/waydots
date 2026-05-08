@@ -63,7 +63,7 @@ static const struct xkb_rule_names xkb_rules = {
 	.layout = "us,ara"
 };
 
-static const int repeat_rate = 25;
+static const int repeat_rate = 50;
 static const int repeat_delay = 600;
 
 /* Trackpad */
@@ -100,7 +100,7 @@ static const uint32_t send_events_mode = LIBINPUT_CONFIG_SEND_EVENTS_ENABLED;
 LIBINPUT_CONFIG_ACCEL_PROFILE_FLAT
 LIBINPUT_CONFIG_ACCEL_PROFILE_ADAPTIVE
 */
-static const enum libinput_config_accel_profile accel_profile = LIBINPUT_CONFIG_ACCEL_PROFILE_ADAPTIVE;
+static const enum libinput_config_accel_profile accel_profile = LIBINPUT_CONFIG_ACCEL_PROFILE_FLAT;
 static const double accel_speed = 0.0;
 
 /* You can choose between:

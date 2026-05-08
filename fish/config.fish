@@ -11,7 +11,6 @@ if not set -q DBUS_SESSION_BUS_ADDRESS
     dbus-run-session dwl
 end
 
-export XDG_CURRENT_DESKTOP=sway
 export XDG_SESSION_TYPE=wayland
 
 
@@ -32,6 +31,7 @@ alias ta="tmux a"
 alias l="exa --icons --group-directories-first"
 alias la="l -a"
 alias ll="l -l"
+alias lla="l -la"
 
 # mobile controls:
 # alias voice+="adb shell input keyevent 24 & echo ok"
@@ -56,6 +56,7 @@ zoxide init --cmd cd fish | source
 
 # current zig version
 set --export PATH ~/Documents/apps/zig/ $PATH
+set --export PATH ~/Documents/apps/odin/ $PATH
 set --export PATH ~/.local/bin/ $PATH
 
 # Android Stuff

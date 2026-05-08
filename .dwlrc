@@ -1,11 +1,14 @@
 #!/bin/fish
-pipewire &
-pipewire-pulse &
-wireplumber &
+pgrep pipewire || pipewire &
+
 wlsunset -l 36.75,-119.8 -t 4500,6500 &
 mako &
 wbg $(cat ~/.cache/wal/wal) --stretch &
+
 foot --server &
+
 tmux new -ds bg
 tmux new -ds main
-# rm -r ~/tmp/*
+
+rm -r ~/tmp/
+mkdir ~/tmp/
