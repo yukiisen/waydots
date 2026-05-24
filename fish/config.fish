@@ -21,6 +21,8 @@ if status is-interactive
 
     alias mpvsearch="mpv \$(find -maxdepth 4 | rg \"mp4|webm|mp3\" | kiri --gaps)"
     alias mpvlist="mpv \$(ls | kiri --gaps)"
+    alias fastfetch="fastfetch --structure-disabled CPU:GPU:Disk:Display:Theme:Icons:Cursor:Font:Locale:TerminalFont"
+
 end
 
 alias rcli="redis-cli"
@@ -32,6 +34,9 @@ alias l="exa --icons --group-directories-first"
 alias la="l -a"
 alias ll="l -l"
 alias lla="l -la"
+
+alias todo="cat ~/Documents/Projects/todo.md"
+alias todoi="nvim ~/Documents/Projects/todo.md"
 
 # mobile controls:
 # alias voice+="adb shell input keyevent 24 & echo ok"
@@ -87,10 +92,13 @@ set --export TERM xterm-256color
 # set -x LANG en_US.UTF-8
 # set -x LC_ALL en_US.UTF-8
 
-# function __complete_syncthing
-#     set -lx COMP_LINE (commandline -cp)
-#     test -z (commandline -ct)
-#     and set COMP_LINE "$COMP_LINE "
-#     /usr/bin/syncthing
-# end
-# complete -f -c syncthing -a "(__complete_syncthing)"
+function __complete_syncthing
+    set -lx COMP_LINE (commandline -cp)
+    test -z (commandline -ct)
+    and set COMP_LINE "$COMP_LINE "
+    /usr/bin/syncthing
+end
+complete -f -c syncthing -a "(__complete_syncthing)"
+
+# opencode
+fish_add_path /home/yuki/.opencode/bin

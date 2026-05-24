@@ -1,5 +1,5 @@
 vim.pack.add({
-    { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
+    -- { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "v0.10.0" },
 
     { src = "https://github.com/ibhagwan/fzf-lua" },
 

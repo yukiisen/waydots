@@ -55,5 +55,3 @@ vim.keymap.set("n", "gf", fzf.git_files, { silent = true })
 
 vim.keymap.set("n", "Fg", fzf.live_grep, { silent = true })
 vim.keymap.set("n", "Fb", fzf.buffers, { silent = true })
-
-

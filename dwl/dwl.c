@@ -1763,6 +1763,7 @@ mapnotify(struct wl_listener *listener, void *data)
 
 	client_get_geometry(c, &c->geom);
 
+
 	/* Handle unmanaged clients first so we can return prior create borders */
 	if (client_is_unmanaged(c)) {
 		/* Unmanaged clients always are floating */
@@ -1773,6 +1774,7 @@ mapnotify(struct wl_listener *listener, void *data)
 			focusclient(c, 1);
 			exclusive_focus = c;
 		}
+
 		goto unset_fullscreen;
 	}
 
@@ -1786,6 +1788,10 @@ mapnotify(struct wl_listener *listener, void *data)
 	client_set_tiled(c, WLR_EDGE_TOP | WLR_EDGE_BOTTOM | WLR_EDGE_LEFT | WLR_EDGE_RIGHT);
 	c->geom.width += 2 * c->bw;
 	c->geom.height += 2 * c->bw;
+
+	/* Put the client on the center of the screen. */
+    c->geom.x = (selmon->m.width - c->geom.width) / 2;
+    c->geom.y = (selmon->m.height - c->geom.height) / 2;
 
 	/* Insert this client into client lists. */
 	wl_list_insert(&clients, &c->link);
@@ -1801,6 +1807,7 @@ mapnotify(struct wl_listener *listener, void *data)
 	} else {
 		applyrules(c);
 	}
+
 	printstatus();
 
 unset_fullscreen:

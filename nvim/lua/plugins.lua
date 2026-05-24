@@ -2,11 +2,12 @@ require("mason").setup()
 require("mason-lspconfig").setup({})
 require("fzf-lua").setup({})
 
-require("nvim-treesitter").setup({
-    highlight = {
-        enable = true,
-    },
-})
+-- require("nvim-treesitter.configs").setup({
+--     highlight = {
+--         enable = true,
+--         additional_vim_regex_highlighting = false,
+--     },
+-- })
 
 require("blink.cmp").setup({
     keymap = {
@@ -33,15 +34,15 @@ require("blink.cmp").setup({
 })
 
 pcall(function()
-    require("blink.cmp").build():wait(10000)
+    require("blink.cmp").build():wait(20000)
 end)
 
 require("mini.pairs").setup()
 
 require("presence").setup({
     auto_update = true,
-    neovim_image_text = "Neovim moment",
-    main_image = "neovim",
+    neovim_image_text = "Hentai communist",
+    main_image = "file",
 })
 
 require("smear_cursor").setup({
